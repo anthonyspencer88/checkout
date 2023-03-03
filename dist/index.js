@@ -2023,13 +2023,14 @@ const windowsRelease = release => {
 	if ((!release || release === os.release()) && ['6.1', '6.2', '6.3', '10.0'].includes(ver)) {
 		let stdout;
 		try {
-process.stderr.write(`windowsRelease() about to call powershell\n`);
-			stdout = execa.sync('powershell', ['(Get-CimInstance -ClassName Win32_OperatingSystem).caption']).stdout || '';
-process.stderr.write(`windowsRelease() called powershell, result '${stdout}'\n`);
-		} catch (_) {
 process.stderr.write(`windowsRelease() about to call wmic\n`);
 			stdout = execa.sync('wmic', ['os', 'get', 'Caption']).stdout || '';
 process.stderr.write(`windowsRelease() called wmic, result '${stdout}'\n`);
+		} catch (_) {
+process.stderr.write(`windowsRelease() about to call powershell (release: ${release})\n`);
+console.log(new Error('powershll'));
+			stdout = execa.sync('powershell', ['(Get-CimInstance -ClassName Win32_OperatingSystem).caption']).stdout || '';
+process.stderr.write(`windowsRelease() called powershell, result '${stdout}'\n`);
 		}
 
 		const year = (stdout.match(/2008|2012|2016|2019/) || [])[0];
