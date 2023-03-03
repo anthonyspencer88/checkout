@@ -8625,6 +8625,7 @@ function deprecate (message) {
 
 "use strict";
 
+console.log(`endpoint start`);
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
@@ -8632,6 +8633,8 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var isPlainObject = _interopDefault(__webpack_require__(696));
 var universalUserAgent = __webpack_require__(562);
+
+console.log(`endpoint required universalUserAgent`);
 
 function lowercaseKeys(object) {
   if (!object) {
@@ -8983,8 +8986,12 @@ function withDefaults(oldDefaults, newDefaults) {
 
 const VERSION = "6.0.1";
 
+console.log(`endpoint gets user agent`);
+
 const userAgent = `octokit-endpoint.js/${VERSION} ${universalUserAgent.getUserAgent()}`; // DEFAULTS has all properties set that EndpointOptions has, except url.
 // So we use RequestParameters and add method as additional required property.
+
+console.log(`endpoint got user agent ${userAgent}`);
 
 const DEFAULTS = {
   method: "GET",
@@ -8999,11 +9006,14 @@ const DEFAULTS = {
   }
 };
 
+console.log(`endpoint got DEFAULTS ${JSON.stringify(DEFAULTS, null, 2)}`);
+
 const endpoint = withDefaults(null, DEFAULTS);
 
 exports.endpoint = endpoint;
 //# sourceMappingURL=index.js.map
 
+console.log(`endpoint start`);
 
 /***/ }),
 
@@ -13485,7 +13495,7 @@ exports.GitVersion = GitVersion;
 
 "use strict";
 
-
+console.log(`universalUserAgent start`)
 Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -13508,6 +13518,7 @@ exports.getUserAgent = getUserAgent;
 //# sourceMappingURL=index.js.map
 
 
+console.log(`universalUserAgent end`)
 /***/ }),
 
 /***/ 563:
