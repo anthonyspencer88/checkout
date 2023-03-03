@@ -4643,6 +4643,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
+const coreCommand = __importStar(__webpack_require__(431));
 // Main
 console.log(new Error(`Uh oh!`))
 throw new Error(`TEST!!!`)
