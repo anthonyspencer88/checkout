@@ -6,7 +6,6 @@ module.exports =
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-process.stderr.write(`__webpack_require(${moduleId})\n`)
 /******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId]) {
@@ -25,7 +24,6 @@ process.stderr.write(`__webpack_require(${moduleId})\n`)
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
 /******/
-process.stderr.write(`end of __webpack_require(${moduleId})\n`)
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
@@ -453,13 +451,11 @@ const macosRelease = __webpack_require__(118);
 const winRelease = __webpack_require__(49);
 
 const osName = (platform, release) => {
-process.stderr.write(`start osName()\n`);
 	if (!platform && release) {
 		throw new Error('You can\'t specify a `release` without specifying `platform`');
 	}
 
 	platform = platform || os.platform();
-process.stderr.write(`osName() got platform '${platform}'\n`);
 
 	let id;
 
@@ -483,14 +479,11 @@ process.stderr.write(`osName() got platform '${platform}'\n`);
 	}
 
 	if (platform === 'win32') {
-process.stderr.write(`osName() got platform '${platform}', do we have a release (${release})?\n`);
 		if (!release && os.platform() === 'win32') {
 			release = os.release();
 		}
 
-process.stderr.write(`osName() got platform '${platform}', do we have a release (${release}) now?\n`);
 		id = release ? winRelease(release) : '';
-process.stderr.write(`osName() got id '${id}'\n`);
 		return 'Windows' + (id ? ' ' + id : '');
 	}
 
@@ -2023,14 +2016,9 @@ const windowsRelease = release => {
 	if ((!release || release === os.release()) && ['6.1', '6.2', '6.3', '10.0'].includes(ver)) {
 		let stdout;
 		try {
-process.stderr.write(`windowsRelease() about to call wmic\n`);
-			stdout = execa.sync('wmic', ['os', 'get', 'Caption']).stdout || '';
-process.stderr.write(`windowsRelease() called wmic, result '${stdout}'\n`);
-		} catch (_) {
-process.stderr.write(`windowsRelease() about to call powershell (release: ${release})\n`);
-console.log(new Error('powershll'));
 			stdout = execa.sync('powershell', ['(Get-CimInstance -ClassName Win32_OperatingSystem).caption']).stdout || '';
-process.stderr.write(`windowsRelease() called powershell, result '${stdout}'\n`);
+		} catch (_) {
+			stdout = execa.sync('wmic', ['os', 'get', 'Caption']).stdout || '';
 		}
 
 		const year = (stdout.match(/2008|2012|2016|2019/) || [])[0];
@@ -4638,13 +4626,10 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-process.stderr.write(`__importStar(${mod})\n`)
-    if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
+    if (mod && mod.__esModule) return mod;
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-process.stderr.write(`__importStar(${mod}) setting result as default\n`)
     __setModuleDefault(result, mod);
-process.stderr.write(`__importStar(${mod}) returned\n`)
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -4657,17 +4642,52 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const core = __importStar(__webpack_require__(470));
+const coreCommand = __importStar(__webpack_require__(431));
 const gitSourceProvider = __importStar(__webpack_require__(853));
+const inputHelper = __importStar(__webpack_require__(821));
+const path = __importStar(__webpack_require__(622));
+const stateHelper = __importStar(__webpack_require__(153));
+function run() {
+    var _a, _b;
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const sourceSettings = yield inputHelper.getInputs();
+            try {
+                // Register problem matcher
+                coreCommand.issueCommand('add-matcher', {}, path.join(__dirname, 'problem-matcher.json'));
+                // Get sources
+                yield gitSourceProvider.getSource(sourceSettings);
+            }
+            finally {
+                // Unregister problem matcher
+                coreCommand.issueCommand('remove-matcher', { owner: 'checkout-git' }, '');
+            }
+        }
+        catch (error) {
+            core.setFailed(`${(_b = (_a = error) === null || _a === void 0 ? void 0 : _a.message) !== null && _b !== void 0 ? _b : error}`);
+        }
+    });
+}
+function cleanup() {
+    var _a, _b;
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield gitSourceProvider.cleanup(stateHelper.RepositoryPath);
+        }
+        catch (error) {
+            core.warning(`${(_b = (_a = error) === null || _a === void 0 ? void 0 : _a.message) !== null && _b !== void 0 ? _b : error}`);
+        }
+    });
+}
 // Main
-console.log(new Error(`Uh oh!`))
-throw new Error(`TEST!!!`)
-// if (!stateHelper.IsPost) {
-//     run();
-// }
-// // Post
-// else {
-//     cleanup();
-// }
+if (!stateHelper.IsPost) {
+    run();
+}
+// Post
+else {
+    cleanup();
+}
 
 
 /***/ }),
@@ -4763,13 +4783,10 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-process.stderr.write(`__importStar(${mod})\n`)
-    if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
+    if (mod && mod.__esModule) return mod;
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-process.stderr.write(`__importStar(${mod}) setting result as default\n`)
     __setModuleDefault(result, mod);
-process.stderr.write(`__importStar(${mod}) returned\n`)
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -8635,7 +8652,6 @@ function deprecate (message) {
 
 "use strict";
 
-process.stderr.write(`endpoint start\n`)
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
@@ -8643,8 +8659,6 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var isPlainObject = _interopDefault(__webpack_require__(696));
 var universalUserAgent = __webpack_require__(562);
-
-process.stderr.write(`endpoint required universalUserAgent\n`)
 
 function lowercaseKeys(object) {
   if (!object) {
@@ -8996,12 +9010,8 @@ function withDefaults(oldDefaults, newDefaults) {
 
 const VERSION = "6.0.1";
 
-process.stderr.write(`endpoint gets user agent\n`)
-
 const userAgent = `octokit-endpoint.js/${VERSION} ${universalUserAgent.getUserAgent()}`; // DEFAULTS has all properties set that EndpointOptions has, except url.
 // So we use RequestParameters and add method as additional required property.
-
-process.stderr.write(`endpoint got user agent ${userAgent}\n`)
 
 const DEFAULTS = {
   method: "GET",
@@ -9016,14 +9026,11 @@ const DEFAULTS = {
   }
 };
 
-process.stderr.write(`endpoint got DEFAULTS ${JSON.stringify(DEFAULTS, null, 2)}\n`)
-
 const endpoint = withDefaults(null, DEFAULTS);
 
 exports.endpoint = endpoint;
 //# sourceMappingURL=index.js.map
 
-process.stderr.write(`endpoint start\n`)
 
 /***/ }),
 
@@ -9100,13 +9107,8 @@ var osName = _interopDefault(__webpack_require__(2));
 
 function getUserAgent() {
   try {
-    // return `Node.js/${process.version.substr(1)} (${osName()}; ${process.arch})`;
-process.stderr.write(`Getting osName()\n`);
-    const res = `Node.js/${process.version.substr(1)} (${osName()}; ${process.arch})`;
-process.stderr.write(`Got osName(). res='${res}'\n`);
-    return res;
+    return `Node.js/${process.version.substr(1)} (${osName()}; ${process.arch})`;
   } catch (error) {
-process.stderr.write(`Got error ${error}\n`);
     if (/wmic os get Caption/.test(error.message)) {
       return "Windows <version undetectable>";
     }
@@ -13510,7 +13512,7 @@ exports.GitVersion = GitVersion;
 
 "use strict";
 
-process.stderr.write(`universalUserAgent start\n`)
+
 Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -13533,7 +13535,6 @@ exports.getUserAgent = getUserAgent;
 //# sourceMappingURL=index.js.map
 
 
-process.stderr.write(`universalUserAgent end\n`)
 /***/ }),
 
 /***/ 563:
@@ -17309,7 +17310,6 @@ if ($defineProperty) {
 
 "use strict";
 
-process.stderr.write(`request start\n`)
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
@@ -17321,7 +17321,6 @@ var isPlainObject = _interopDefault(__webpack_require__(696));
 var nodeFetch = _interopDefault(__webpack_require__(454));
 var requestError = __webpack_require__(463);
 
-process.stderr.write(`request assigning version\n`)
 const VERSION = "5.4.2";
 
 function getBufferResponse(response) {
@@ -17459,7 +17458,6 @@ const request = withDefaults(endpoint.endpoint, {
 exports.request = request;
 //# sourceMappingURL=index.js.map
 
-process.stderr.write(`request end\n`)
 
 /***/ }),
 
@@ -31836,8 +31834,6 @@ function paginationMethodsPlugin (octokit) {
 
 "use strict";
 
-console.log('start of gitSourceProvider');
-
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -31851,13 +31847,10 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-process.stderr.write(` __importStar(${mod})\n`)
-    if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
+    if (mod && mod.__esModule) return mod;
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-process.stderr.write(` __importStar(${mod}) setting result as default\n`)
     __setModuleDefault(result, mod);
-process.stderr.write(` __importStar(${mod}) returned\n`)
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -32100,8 +32093,6 @@ function getGitCommandManager(settings) {
     });
 }
 
-
-console.log('end of gitSourceProvider');
 
 /***/ }),
 
@@ -35058,14 +35049,11 @@ module.exports = function (object, opts) {
 
 "use strict";
 
-process.stderr.write(`graphql_1 start\n`)
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var request = __webpack_require__(753);
 var universalUserAgent = __webpack_require__(796);
-
-process.stderr.write(`graphql_1 required universalUserAgent\n`)
 
 const VERSION = "4.3.1";
 
@@ -35128,7 +35116,6 @@ function withDefaults(request$1, newDefaults) {
   });
 }
 
-process.stderr.write(`graphql_1 assigning graphql$1\n`)
 const graphql$1 = withDefaults(request.request, {
   headers: {
     "user-agent": `octokit-graphql.js/${VERSION} ${universalUserAgent.getUserAgent()}`
@@ -35136,8 +35123,6 @@ const graphql$1 = withDefaults(request.request, {
   method: "POST",
   url: "/graphql"
 });
-process.stderr.write(`graphql_1 assigned graphql$1\n`)
-
 function withCustomRequest(customRequest) {
   return withDefaults(customRequest, {
     method: "POST",
@@ -35150,7 +35135,6 @@ exports.withCustomRequest = withCustomRequest;
 //# sourceMappingURL=index.js.map
 
 
-process.stderr.write(`graphql_1 end\n`)
 /***/ }),
 
 /***/ 915:
