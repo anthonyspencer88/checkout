@@ -4642,8 +4642,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core = __importStar(__webpack_require__(470));
-const coreCommand = __importStar(__webpack_require__(431));
 const gitSourceProvider = __importStar(__webpack_require__(853));
 // Main
 console.log(new Error(`Uh oh!`))
@@ -31801,6 +31799,8 @@ function paginationMethodsPlugin (octokit) {
 
 "use strict";
 
+console.log('line 31802');
+
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -32060,6 +32060,8 @@ function getGitCommandManager(settings) {
     });
 }
 
+
+console.log('line 32064');
 
 /***/ }),
 
