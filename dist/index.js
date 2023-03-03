@@ -6,6 +6,7 @@ module.exports =
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
+console.log(`__webpack_require(${moduleId})`);
 /******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId]) {
@@ -24,6 +25,7 @@ module.exports =
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
 /******/
+console.log(`end of __webpack_require(${moduleId})`);
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
@@ -4626,10 +4628,13 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
+console.log(`__importStar(${mod})`);
+    if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+console.log(`__importStar(${mod}) setting result as default`);
     __setModuleDefault(result, mod);
+console.log(`__importStar(${mod}) returned`);
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -4748,10 +4753,13 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
+console.log(`__importStar(${mod})`);
+    if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+console.log(`__importStar(${mod}) setting result as default`);
     __setModuleDefault(result, mod);
+console.log(`__importStar(${mod}) returned`);
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -31799,7 +31807,7 @@ function paginationMethodsPlugin (octokit) {
 
 "use strict";
 
-console.log('line 31802');
+console.log('start of gitSourceProvider');
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -31814,10 +31822,13 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
+console.log(` __importStar(${mod})`);
+    if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+console.log(` __importStar(${mod}) setting result as default`);
     __setModuleDefault(result, mod);
+console.log(` __importStar(${mod}) returned`);
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -32061,7 +32072,7 @@ function getGitCommandManager(settings) {
 }
 
 
-console.log('line 32064');
+console.log('end of gitSourceProvider');
 
 /***/ }),
 
