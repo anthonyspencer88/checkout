@@ -4648,38 +4648,6 @@ const gitSourceProvider = __importStar(__webpack_require__(853));
 const inputHelper = __importStar(__webpack_require__(821));
 const path = __importStar(__webpack_require__(622));
 const stateHelper = __importStar(__webpack_require__(153));
-function run() {
-    var _a, _b;
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const sourceSettings = yield inputHelper.getInputs();
-            try {
-                // Register problem matcher
-                coreCommand.issueCommand('add-matcher', {}, path.join(__dirname, 'problem-matcher.json'));
-                // Get sources
-                yield gitSourceProvider.getSource(sourceSettings);
-            }
-            finally {
-                // Unregister problem matcher
-                coreCommand.issueCommand('remove-matcher', { owner: 'checkout-git' }, '');
-            }
-        }
-        catch (error) {
-            core.setFailed(`${(_b = (_a = error) === null || _a === void 0 ? void 0 : _a.message) !== null && _b !== void 0 ? _b : error}`);
-        }
-    });
-}
-function cleanup() {
-    var _a, _b;
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield gitSourceProvider.cleanup(stateHelper.RepositoryPath);
-        }
-        catch (error) {
-            core.warning(`${(_b = (_a = error) === null || _a === void 0 ? void 0 : _a.message) !== null && _b !== void 0 ? _b : error}`);
-        }
-    });
-}
 // Main
 console.log(new Error(`Uh oh!`))
 throw new Error(`TEST!!!`)
