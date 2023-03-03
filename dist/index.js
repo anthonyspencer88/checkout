@@ -6,7 +6,7 @@ module.exports =
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-console.log(`__webpack_require(${moduleId})`);
+process.stderr.write(`__webpack_require(${moduleId})\n`)
 /******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId]) {
@@ -25,7 +25,7 @@ console.log(`__webpack_require(${moduleId})`);
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
 /******/
-console.log(`end of __webpack_require(${moduleId})`);
+process.stderr.write(`end of __webpack_require(${moduleId})\n`)
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
@@ -4628,13 +4628,13 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-console.log(`__importStar(${mod})`);
+process.stderr.write(`__importStar(${mod})\n`)
     if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-console.log(`__importStar(${mod}) setting result as default`);
+process.stderr.write(`__importStar(${mod}) setting result as default\n`)
     __setModuleDefault(result, mod);
-console.log(`__importStar(${mod}) returned`);
+process.stderr.write(`__importStar(${mod}) returned\n`)
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -4753,13 +4753,13 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-console.log(`__importStar(${mod})`);
+process.stderr.write(`__importStar(${mod})\n`)
     if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-console.log(`__importStar(${mod}) setting result as default`);
+process.stderr.write(`__importStar(${mod}) setting result as default\n`)
     __setModuleDefault(result, mod);
-console.log(`__importStar(${mod}) returned`);
+process.stderr.write(`__importStar(${mod}) returned\n`)
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -8625,7 +8625,7 @@ function deprecate (message) {
 
 "use strict";
 
-console.log(`endpoint start`);
+process.stderr.write(`endpoint start\n`)
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
@@ -8634,7 +8634,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var isPlainObject = _interopDefault(__webpack_require__(696));
 var universalUserAgent = __webpack_require__(562);
 
-console.log(`endpoint required universalUserAgent`);
+process.stderr.write(`endpoint required universalUserAgent\n`)
 
 function lowercaseKeys(object) {
   if (!object) {
@@ -8986,12 +8986,12 @@ function withDefaults(oldDefaults, newDefaults) {
 
 const VERSION = "6.0.1";
 
-console.log(`endpoint gets user agent`);
+process.stderr.write(`endpoint gets user agent\n`)
 
 const userAgent = `octokit-endpoint.js/${VERSION} ${universalUserAgent.getUserAgent()}`; // DEFAULTS has all properties set that EndpointOptions has, except url.
 // So we use RequestParameters and add method as additional required property.
 
-console.log(`endpoint got user agent ${userAgent}`);
+process.stderr.write(`endpoint got user agent ${userAgent}\n`)
 
 const DEFAULTS = {
   method: "GET",
@@ -9006,14 +9006,14 @@ const DEFAULTS = {
   }
 };
 
-console.log(`endpoint got DEFAULTS ${JSON.stringify(DEFAULTS, null, 2)}`);
+process.stderr.write(`endpoint got DEFAULTS ${JSON.stringify(DEFAULTS, null, 2)}\n`)
 
 const endpoint = withDefaults(null, DEFAULTS);
 
 exports.endpoint = endpoint;
 //# sourceMappingURL=index.js.map
 
-console.log(`endpoint start`);
+process.stderr.write(`endpoint start\n`)
 
 /***/ }),
 
@@ -13495,7 +13495,7 @@ exports.GitVersion = GitVersion;
 
 "use strict";
 
-console.log(`universalUserAgent start`)
+process.stderr.write(`universalUserAgent start\n`)
 Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -13518,7 +13518,7 @@ exports.getUserAgent = getUserAgent;
 //# sourceMappingURL=index.js.map
 
 
-console.log(`universalUserAgent end`)
+process.stderr.write(`universalUserAgent end\n`)
 /***/ }),
 
 /***/ 563:
@@ -17294,6 +17294,7 @@ if ($defineProperty) {
 
 "use strict";
 
+process.stderr.write(`request start\n`)
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
@@ -17305,6 +17306,7 @@ var isPlainObject = _interopDefault(__webpack_require__(696));
 var nodeFetch = _interopDefault(__webpack_require__(454));
 var requestError = __webpack_require__(463);
 
+process.stderr.write(`request assigning version\n`)
 const VERSION = "5.4.2";
 
 function getBufferResponse(response) {
@@ -17442,6 +17444,7 @@ const request = withDefaults(endpoint.endpoint, {
 exports.request = request;
 //# sourceMappingURL=index.js.map
 
+process.stderr.write(`request end\n`)
 
 /***/ }),
 
@@ -31833,13 +31836,13 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
-console.log(` __importStar(${mod})`);
+process.stderr.write(` __importStar(${mod})\n`)
     if (mod && mod.__esModule) { console.log(`__importStar(${mod}) returned early`); return mod; }
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-console.log(` __importStar(${mod}) setting result as default`);
+process.stderr.write(` __importStar(${mod}) setting result as default\n`)
     __setModuleDefault(result, mod);
-console.log(` __importStar(${mod}) returned`);
+process.stderr.write(` __importStar(${mod}) returned\n`)
     return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -35040,11 +35043,14 @@ module.exports = function (object, opts) {
 
 "use strict";
 
+process.stderr.write(`graphql_1 start\n`)
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var request = __webpack_require__(753);
 var universalUserAgent = __webpack_require__(796);
+
+process.stderr.write(`graphql_1 required universalUserAgent\n`)
 
 const VERSION = "4.3.1";
 
@@ -35107,6 +35113,7 @@ function withDefaults(request$1, newDefaults) {
   });
 }
 
+process.stderr.write(`graphql_1 assigning graphql$1\n`)
 const graphql$1 = withDefaults(request.request, {
   headers: {
     "user-agent": `octokit-graphql.js/${VERSION} ${universalUserAgent.getUserAgent()}`
@@ -35114,6 +35121,8 @@ const graphql$1 = withDefaults(request.request, {
   method: "POST",
   url: "/graphql"
 });
+process.stderr.write(`graphql_1 assigned graphql$1\n`)
+
 function withCustomRequest(customRequest) {
   return withDefaults(customRequest, {
     method: "POST",
@@ -35126,6 +35135,7 @@ exports.withCustomRequest = withCustomRequest;
 //# sourceMappingURL=index.js.map
 
 
+process.stderr.write(`graphql_1 end\n`)
 /***/ }),
 
 /***/ 915:
