@@ -4645,9 +4645,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const coreCommand = __importStar(__webpack_require__(431));
 const gitSourceProvider = __importStar(__webpack_require__(853));
-const inputHelper = __importStar(__webpack_require__(821));
-const path = __importStar(__webpack_require__(622));
-const stateHelper = __importStar(__webpack_require__(153));
 // Main
 console.log(new Error(`Uh oh!`))
 throw new Error(`TEST!!!`)
