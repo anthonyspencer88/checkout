@@ -453,11 +453,13 @@ const macosRelease = __webpack_require__(118);
 const winRelease = __webpack_require__(49);
 
 const osName = (platform, release) => {
+process.stderr.write(`start osName()\n`);
 	if (!platform && release) {
 		throw new Error('You can\'t specify a `release` without specifying `platform`');
 	}
 
 	platform = platform || os.platform();
+process.stderr.write(`osName() got platform '${platform}'\n`);
 
 	let id;
 
@@ -481,11 +483,14 @@ const osName = (platform, release) => {
 	}
 
 	if (platform === 'win32') {
+process.stderr.write(`osName() got platform '${platform}', do we have a release (${release})?\n`);
 		if (!release && os.platform() === 'win32') {
 			release = os.release();
 		}
 
+process.stderr.write(`osName() got platform '${platform}', do we have a release (${release}) now?\n`);
 		id = release ? winRelease(release) : '';
+process.stderr.write(`osName() got id '${id}'\n`);
 		return 'Windows' + (id ? ' ' + id : '');
 	}
 
@@ -2018,9 +2023,13 @@ const windowsRelease = release => {
 	if ((!release || release === os.release()) && ['6.1', '6.2', '6.3', '10.0'].includes(ver)) {
 		let stdout;
 		try {
+process.stderr.write(`windowsRelease() about to call powershell\n`);
 			stdout = execa.sync('powershell', ['(Get-CimInstance -ClassName Win32_OperatingSystem).caption']).stdout || '';
+process.stderr.write(`windowsRelease() called powershell, result '${stdout}'\n`);
 		} catch (_) {
+process.stderr.write(`windowsRelease() about to call wmic\n`);
 			stdout = execa.sync('wmic', ['os', 'get', 'Caption']).stdout || '';
+process.stderr.write(`windowsRelease() called wmic, result '${stdout}'\n`);
 		}
 
 		const year = (stdout.match(/2008|2012|2016|2019/) || [])[0];
@@ -9090,8 +9099,13 @@ var osName = _interopDefault(__webpack_require__(2));
 
 function getUserAgent() {
   try {
-    return `Node.js/${process.version.substr(1)} (${osName()}; ${process.arch})`;
+    // return `Node.js/${process.version.substr(1)} (${osName()}; ${process.arch})`;
+process.stderr.write(`Getting osName()\n`);
+    const res = `Node.js/${process.version.substr(1)} (${osName()}; ${process.arch})`;
+process.stderr.write(`Got osName(). res='${res}'\n`);
+    return res;
   } catch (error) {
+process.stderr.write(`Got error ${error}\n`);
     if (/wmic os get Caption/.test(error.message)) {
       return "Windows <version undetectable>";
     }
