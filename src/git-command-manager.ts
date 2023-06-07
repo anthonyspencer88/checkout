@@ -468,10 +468,14 @@ class GitCommandManager {
   static async createCommandManager(
     workingDirectory: string,
     lfs: boolean,
-    sparseCheckout: boolean
+    doSparseCheckout: boolean
   ): Promise<GitCommandManager> {
     const result = new GitCommandManager()
-    await result.initializeCommandManager(workingDirectory, lfs, sparseCheckout)
+    await result.initializeCommandManager(
+      workingDirectory,
+      lfs,
+      doSparseCheckout
+    )
     return result
   }
 
@@ -522,7 +526,7 @@ class GitCommandManager {
   private async initializeCommandManager(
     workingDirectory: string,
     lfs: boolean,
-    sparseCheckout: boolean
+    doSparseCheckout: boolean
   ): Promise<void> {
     this.workingDirectory = workingDirectory
 
@@ -585,7 +589,7 @@ class GitCommandManager {
       }
     }
 
-    this.doSparseCheckout = sparseCheckout
+    this.doSparseCheckout = doSparseCheckout
     if (this.doSparseCheckout) {
       // The `git sparse-checkout` command was introduced in Git v2.25.0
       const minimumGitSparseCheckoutVersion = new GitVersion('2.25')
