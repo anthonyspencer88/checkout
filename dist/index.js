@@ -4708,7 +4708,7 @@ class ExecState extends events.EventEmitter {
                 error = new Error(`There was an error when attempting to execute the process '${this.toolPath}'. This may indicate the process failed to start. Error: ${this.processError}`);
             }
             else if (this.processExitCode !== 0 && !this.options.ignoreReturnCode) {
-                error = new Error(`The process '${this.toolPath}' failed with exit code ${this.processExitCode}`);
+                error = new Error(`The process '${this.toolPath}' failed with exit code ${this.processExitCode}:\n${this.processStderr}`);
             }
             else if (this.processStderr && this.options.failOnStdErr) {
                 error = new Error(`The process '${this.toolPath}' failed because one or more lines were written to the STDERR stream`);
