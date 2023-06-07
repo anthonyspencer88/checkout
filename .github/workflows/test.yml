@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - releases/*
+      - test-lfs-sparse-checkout
 
 jobs:
   build:
@@ -107,6 +108,8 @@ jobs:
           ref: test-data/v2/lfs
           path: lfs
           lfs: true
+          sparse-checkout: |
+            abc
       - name: Verify LFS
         shell: bash
         run: __test__/verify-lfs.sh
