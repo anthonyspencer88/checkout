@@ -842,10 +842,10 @@ class GitCommandManager {
             return output.exitCode === 0;
         });
     }
-    static createCommandManager(workingDirectory, lfs, sparseCheckout) {
+    static createCommandManager(workingDirectory, lfs, doSparseCheckout) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = new GitCommandManager();
-            yield result.initializeCommandManager(workingDirectory, lfs, sparseCheckout);
+            yield result.initializeCommandManager(workingDirectory, lfs, doSparseCheckout);
             return result;
         });
     }
@@ -881,7 +881,7 @@ class GitCommandManager {
             return result;
         });
     }
-    initializeCommandManager(workingDirectory, lfs, sparseCheckout) {
+    initializeCommandManager(workingDirectory, lfs, doSparseCheckout) {
         return __awaiter(this, void 0, void 0, function* () {
             this.workingDirectory = workingDirectory;
             // Git-lfs will try to pull down assets if any of the local/user/system setting exist.
@@ -933,7 +933,7 @@ class GitCommandManager {
                     throw new Error(`Minimum required git-lfs version is ${minimumGitLfsVersion}. Your git-lfs ('${gitLfsPath}') is ${gitLfsVersion}`);
                 }
             }
-            this.doSparseCheckout = sparseCheckout;
+            this.doSparseCheckout = doSparseCheckout;
             if (this.doSparseCheckout) {
                 // The `git sparse-checkout` command was introduced in Git v2.25.0
                 const minimumGitSparseCheckoutVersion = new git_version_1.GitVersion('2.25');
