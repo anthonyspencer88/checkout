@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - releases/*
+      - "*"
 
 jobs:
   build:
@@ -38,6 +39,7 @@ jobs:
       - name: Checkout basic
         uses: ./
         with:
+          repository: actions/checkout # hardcoded, otherwise doesn't work from a fork
           ref: test-data/v2/basic
           path: basic
       - name: Verify basic
