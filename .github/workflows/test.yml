@@ -25,12 +25,12 @@ jobs:
             dist
           path: sparse-checkout
 
-      - name: Verify sparse checkout
-        run: __test__/verify-sparse-checkout.sh
-
       - name: Verify not disabled sparse checkout
         shell: bash
         run: set -x && ! ls -l src/git-command-manager.ts
+
+      - name: Verify sparse checkout
+        run: __test__/verify-sparse-checkout.sh
 
       # Sparse checkout (non-cone mode)
       # Disabled sparse checkout in existing checkout
