@@ -11,6 +11,10 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
 
     steps:
+      - uses: mxschmitt/action-tmate@v3
+        with:
+          detached: true
+
       # Clone this repo
       - name: Checkout
         uses: actions/checkout@v3
