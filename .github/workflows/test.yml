@@ -27,7 +27,7 @@ jobs:
 
       - name: Verify not disabled sparse checkout
         shell: bash
-        run: set -x && ! ls -l src/git-command-manager.ts
+        run: set -x && ! ls -l sparse-checkout/src/git-command-manager.ts
 
       - name: Verify sparse checkout
         run: __test__/verify-sparse-checkout.sh
