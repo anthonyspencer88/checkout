@@ -41,7 +41,7 @@ jobs:
 
       - name: Verify disabled sparse checkout
         shell: bash
-        run: set -x && ls -l src/git-command-manager.ts
+        run: set -x && ls -l sparse-checkout/src/git-command-manager.ts
 
       # Sparse checkout (non-cone mode)
       - name: Sparse checkout (non-cone mode)
